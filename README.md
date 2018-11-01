@@ -27,55 +27,54 @@ ZTS（这一个变量加上是开启线程安全，不加是关闭线程安全�
 9 右键项目属性，连接器，输入，附加依赖项，编辑，将php5.lib的路径放进去,此处需要注意因为是win32所有必须是x86下的也就是  
 php-5.6.38-nts-Win32-VC11-x86下的dev\php5.lib,不然报错  
 10 具体配置见 https://blog.csdn.net/muyilongh/article/details/51062262  
-11 编写代码  
-PHP_FUNCTION(miracle_add) {  
-  int argc = ZEND_NUM_ARGS();
-	int x;
-	int y;
-	int z;
-	if (zend_parse_parameters(argc TSRMLS_CC, "ll", &x, &y) == FAILURE) {   //ll此处是L的小写
-		return;
-	}
-	z = x + y;
-	RETURN_LONG(z);
+11 编写代码    
+PHP_FUNCTION(miracle_add) {    
+  int argc = ZEND_NUM_ARGS();  
+	int x;  
+	int y;  
+	int z;  
+	if (zend_parse_parameters(argc TSRMLS_CC, "ll", &x, &y) == FAILURE) {   //ll此处是L的小写  
+		return;  
+	}  
+	z = x + y;  
+	RETURN_LONG(z);  
+}  
+PHP_FUNCTION(miracle_concat)  
+{  
+	char *str = NULL;  
+	int argc = ZEND_NUM_ARGS();  
+	int str_len;  
+	long n;  
+	char *result;  
+	char *ptr;  
+	int result_length;  
+
+	if (zend_parse_parameters(argc TSRMLS_CC, "sl", &str, &str_len, &n) == FAILURE) {  
+		return;  
+	}  
+
+	result_length = (str_len * n);  
+	result = (char *)emalloc(result_length + 1);  
+	ptr = result;  
+	while (n--) {  
+		memcpy(ptr, str, str_len);  
+		ptr += str_len;  
+	}  
+
+	*ptr = '\0';  
+
+	RETURN_STRINGL(result, result_length, 0);  
 }
-PHP_FUNCTION(miracle_concat)
-{
-	char *str = NULL;
-	int argc = ZEND_NUM_ARGS();
-	int str_len;
-	long n;
-	char *result;
-	char *ptr;
-	int result_length;
 
-	if (zend_parse_parameters(argc TSRMLS_CC, "sl", &str, &str_len, &n) == FAILURE) {
-		return;
-	}
-
-	result_length = (str_len * n);
-	result = (char *)emalloc(result_length + 1);
-	ptr = result;
-	while (n--) {
-		memcpy(ptr, str, str_len);
-		ptr += str_len;
-	}
-
-	*ptr = '\0';
-
-	RETURN_STRINGL(result, result_length, 0);
-}
-
-const zend_function_entry jia_functions[] = {
-	PHP_FE(miracle_add, NULL)  //添加上面对应的方法名称且不能为最后一行
-	PHP_FE(miracle_concat, NULL) //添加上面对应的方法名称且不能为最后一行
-	PHP_FE(confirm_jia_compiled,	NULL)		/* For testing, remove later. */
-	PHP_FE_END	/* Must be the last line in jia_functions[] */
+const zend_function_entry jia_functions[] = {  
+	PHP_FE(miracle_add, NULL)  //添加上面对应的方法名称且不能为最后一行  
+	PHP_FE(miracle_concat, NULL) //添加上面对应的方法名称且不能为最后一行  
+	PHP_FE(confirm_jia_compiled,	NULL)		/* For testing, remove later. */  
+	PHP_FE_END	/* Must be the last line in jia_functions[] */  
 };
-12 生成xx.dll文件  
-13 把xx.dll文件拷贝运行环境ext下 配置php.ini extension=xx.dll   
+12 生成xx.dll文件   
+13 把xx.dll文件拷贝运行环境ext下 配置php.ini extension=xx.dll    
 14 重启服务  
 15 php调用   
-<?php 
-  echo miracle_add(4, 19);
-  echo miracle_concat("abcd", 20);
+  echo miracle_add(4, 19);  
+  echo miracle_concat("abcd", 20);  
