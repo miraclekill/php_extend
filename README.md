@@ -20,8 +20,8 @@ ZEND_DEBUG=0
 PHP_EXTENSION  
 PHP_WIN32  
 ZEND_WIN32  
-HAVE_TEST=1（这里红色部分，要改成你的扩展名称，不改成你的扩展名，php会不识别）  
-COMPILE_DL_TEST（这里红色部分，要改成你的扩展名称，不改成你的扩展名，php会不识别）  
+HAVE_TEST=1（这里TEST部分，要改成你的扩展名称，不改成你的扩展名，php会不识别）  
+COMPILE_DL_TEST（这里TEST部分，要改成你的扩展名称，不改成你的扩展名，php会不识别）  
 ZTS（这一个变量加上是开启线程安全，不加是关闭线程安全）nts 不用添加, ts需要添加   
 8 拷贝win32\build\config.w32.h.in => main\config.w32.h  
 9 右键项目属性，连接器，输入，附加依赖项，编辑，将php5.lib的路径放进去,此处需要注意因为是win32所有必须是x86下的也就是  
