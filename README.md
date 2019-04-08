@@ -8,7 +8,7 @@ win7 vs2013 c开发php-5.6.38-nts-Win32-VC11-x86扩展
 4 修改ext_skel_win32.php中$cygwin_path=程序所安装路径  
 5 生成骨架  cd php-5.6.38-src\ext;    进入路径后执行 D:\php-5.6.38-nts-Win32-VC11-x86\php.exe ext_skel_win32.php --extname=test,test是扩展名称 
 
-6 vs 新建->从现有代码文件创建项目->c++->生成的扩展路径->动态链接dll->完成  
+6 vs 新建->从现有代码文件创建项目->c++->选择生成的骨架路径->动态链接dll->完成  
 7 修改错误,  
 1)先把项目解决方案配置改为Release,右键项目属性，C/C++，常规，附加包含目录，编辑.   
 2)加入以下几个php源码目录  
@@ -25,7 +25,7 @@ HAVE_TEST=1（这里TEST部分，要改成你的扩展名称，不改成你的�
 COMPILE_DL_TEST（这里TEST部分，要改成你的扩展名称，不改成你的扩展名，php会不识别）  
 ZTS（这一个变量加上是开启线程安全，不加是关闭线程安全）nts 不用添加, ts需要添加   
 8 拷贝win32\build\config.w32.h.in => main\config.w32.h  
-9 右键项目属性，连接器，输入，附加依赖项，编辑，将php5.lib的路径放进去,此处需要注意因为是win32所有必须是x86下的也就是  
+9 右键项目属性，链接器，输入，附加依赖项，编辑，将php5.lib的路径放进去,此处需要注意因为是win32所有必须是x86下的也就是  
 php-5.6.38-nts-Win32-VC11-x86下的dev\php5.lib,不然报错  
 10 具体配置见 https://blog.csdn.net/muyilongh/article/details/51062262  
 11 编写代码    
