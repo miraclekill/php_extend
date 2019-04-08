@@ -6,7 +6,8 @@ win7 vs2013 c开发php-5.6.38-nts-Win32-VC11-x86扩展
 2 安装Cygwin（下载地址：http://www.cygwin.com/）  
 3 安装vs2013  
 4 修改ext_skel_win32.php中$cygwin_path=程序所安装路径  
-5 生成骨架  cd php-5.6.38-src\ext;    进入路径后执行 php-5.6.38-nts-Win32-VC11-x86\php.exe ext_skel_win32.php --extname=test,test是扩展名称  
+5 生成骨架  cd php-5.6.38-src\ext;    进入路径后执行 D:\php-5.6.38-nts-Win32-VC11-x86\php.exe ext_skel_win32.php --extname=test,test是扩展名称 
+
 6 vs 新建->从现有代码文件创建项目->c++->生成的扩展路径->动态链接dll->完成  
 7 修改错误,  
 1)先把项目解决方案配置改为Release,右键项目属性，C/C++，常规，附加包含目录，编辑.   
